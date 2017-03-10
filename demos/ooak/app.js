@@ -24,7 +24,7 @@ var stand = hub()
       .addTo(stand)
       .on("select", function() {
         temp.copy(pic.position);
-        temp.z += 0.5;
+        temp.z += 0.35;
         env.teleport(temp);
       });
 
@@ -49,7 +49,7 @@ var stand = hub()
 range(4)
   .forEach(function(wall) {
     var b = box(10, 3, 0.1)
-      .colored(0xffffff)
+      .colored(0xefddb0)
       .latLon(0, 90 * wall, 5)
       .addTo(env.scene);
     b.position.z += 3.40;
