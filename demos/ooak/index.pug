@@ -1,0 +1,14 @@
+doctype html
+html
+  head
+    meta(charset="utf-8")
+    meta(name="viewport", content="initial-scale=1.0,user-scalable=no")
+    title One of a Kind
+    link(type="text/css", rel="stylesheet", href= "style" + cssExt)
+  body
+    canvas#frontBuffer
+    #controls
+      #fullScreenButtonContainer
+      progress
+    script(src= fileRoot + "node_modules/primrose/preloader" + jsExt, data-files= fileRoot + "node_modules/three/build/three" + jsExt + "," + fileRoot + "node_modules/primrose/Primrose" + jsExt + ",app" + jsExt)
+    != liveReload
