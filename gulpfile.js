@@ -37,6 +37,17 @@ var gulp = require("gulp"),
 
   devServer = builder.devServer(stopOnFiles, reloadOnFiles);
 
+
+gulp.task("copy", () => gulp.src([
+    "node_modules/primrose/Primrose.js",
+    "node_modules/primrose/Primrose.min.js",
+    "node_modules/primrose/preloader.js",
+    "node_modules/primrose/preloader.min.js",
+    "node_modules/three/build/three.js",
+    "node_modules/three/build/three.min.js"
+  ])
+  .pipe(gulp.dest("vendor")));
+
 gulp.task("js:release", demos);
 
 gulp.task("html", [html.default]);
@@ -47,8 +58,8 @@ gulp.task("css", [css.default]);
 gulp.task("css:debug", [css.debug]);
 gulp.task("css:release", [css.release]);
 
-gulp.task("default", [ "html", "css" ], devServer);
-gulp.task("test", [ "release" ], devServer);
+gulp.task("default", [ "copy", "html", "css" ], devServer);
+gulp.task("test", [ "copy", "release" ], devServer);
 
-gulp.task("debug", ["html:debug", "css:debug"]);
-gulp.task("release",  ["js:release", "html:release", "css:release"]);
+gulp.task("debug", [ "copy", "html:debug", "css:debug"]);
+gulp.task("release",  [ "copy", "js:release", "html:release", "css:release"]);
