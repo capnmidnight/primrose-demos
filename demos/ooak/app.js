@@ -6,8 +6,8 @@ var env = new Primrose.BrowserEnvironment({
   useGaze: false
 });
 
-var dim = 25,
-  rad = 0.75,
+var dim = 60,
+  rad = 0.5,
   opts = {
     unshaded: true,
     transparent: true,
@@ -17,22 +17,15 @@ var dim = 25,
   stand = hub()
     .named("Stand")
     .at(0, env.options.avatarHeight, 0)
-    .addTo(env.scene),
+    .addTo(env.scene);
 
-  photo1 = new Primrose.Controls.Image([
-      "cng-left.jpg",
-      "cng-right.jpg"
-    ], opts)
-    .named("CNG")
-    .latLon(0, dim, rad)
-    .addTo(stand),
-
-  photo2 = new Primrose.Controls.Image([
-      "usat-left.jpg",
-      "usat-right.jpg"
-    ], opts)
-    .named("USAToday")
-    .latLon(0, -dim, rad)
+  ["cng", "usat"].forEach(function(img, i, arr) {
+    new Primrose.Controls.Image(
+      [img + "-left.jpg", img + "-right.jpg"],
+      opts)
+    .named("Image" + i)
+    .latLon(0, dim * (i - (arr.length - 1) / 2), rad)
     .addTo(stand);
+  });
 
 env.on("ready", Preloader.hide);
