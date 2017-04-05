@@ -11,7 +11,7 @@
   "author": "Sean T. McBeth",
   "license": "ISC",
   "devDependencies": {
-    "notiontheory-basic-build": "^6.3.0"
+    "marigold-build": "^1.4.0"
   },
   "dependencies": {
     "primrose": "^0.31.3"

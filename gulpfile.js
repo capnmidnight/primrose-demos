@@ -1,25 +1,25 @@
 var gulp = require("gulp"),
   glob = require("glob").sync,
   pkg = require("./package.json"),
-  nt = require("notiontheory-basic-build"),
-
-  builder = nt.setup(gulp, pkg),
+  marigold = require("marigold-build").setup(gulp, pkg),
 
   demoFiles = "demos/*/app.js",
   demos = glob(demoFiles).map(function(file) {
 
     var name = file.match(/demos\/(\w+)\/app\.js/)[1],
       taskName = "Demo:" + name,
-      min = builder.min(taskName, file);
+      min = marigold.min([file], null, {
+        name: taskName
+      });
 
     return min.release;
   }),
 
   pugFiles = ["*.pug", "demos/**/*.pug"],
-  html = builder.html("Primrose", pugFiles, "src"),
+  html = marigold.html(pugFiles),
 
   stylusFiles = ["*.styl", "demos/**/*.styl"],
-  css = builder.css("Primrose", stylusFiles),
+  css = marigold.css(stylusFiles),
 
   stopOnFiles = [demoFiles]
     .concat(pugFiles)
@@ -35,7 +35,9 @@ var gulp = require("gulp"),
     "demos/**/*.html"
   ],
 
-  devServer = builder.devServer(stopOnFiles, reloadOnFiles);
+  devServer = marigold.devServer(stopOnFiles, reloadOnFiles, {
+    url: "primrose-demos/demos"
+  });
 
 
 gulp.task("copy", () => gulp.src([

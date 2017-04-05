@@ -1,0 +1,16 @@
+doctype html
+html
+  head
+    meta(charset="utf-8")
+    meta(name="viewport", content="initial-scale=1.0,user-scalable=no")
+    title Live Webcam
+    link(type="text/css", rel="stylesheet", href= "style" + cssExt)
+  body
+    video
+    canvas#backBuffer
+    canvas#frontBuffer
+    #controls
+      #fullScreenButtonContainer
+      progress
+    script(src= fileRoot + "vendor/preloader" + jsExt, data-files= fileRoot + "vendor/three" + jsExt + "," + fileRoot + "vendor/Primrose" + jsExt + ",app" + jsExt)
+    != liveReload
